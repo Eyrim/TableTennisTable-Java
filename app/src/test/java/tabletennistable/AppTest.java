@@ -1,10 +1,11 @@
 package tabletennistable;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 public class AppTest {
@@ -17,14 +18,13 @@ public class AppTest {
     }
 
     @Test
-    public void testPrintsCurrentState()
-    {
+    public void testPrintsCurrentState() {
         initMocks();
         League league = new League();
-        Mockito.when(renderer.render(league)).thenReturn("Rendered League");
+        when(renderer.render(league)).thenReturn("Rendered League");
 
         App app = new App(league, renderer, null);
 
-        Assert.assertEquals("Rendered League", app.sendCommand("print"));
+        assertEquals("Rendered League", app.sendCommand("print"));
     }
 }

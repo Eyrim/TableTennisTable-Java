@@ -14,8 +14,7 @@ public class GameSteps {
     private String response;
 
     @Before
-    public void createApp()
-    {
+    public void createApp() {
         League league = new League();
         LeagueRenderer leagueRenderer = new LeagueRenderer();
         FileService fileService = new FileService();
@@ -23,20 +22,17 @@ public class GameSteps {
     }
 
     @Given("the league has no players")
-    public void givenTheLeagueHasNoPlayers()
-    {
+    public void givenTheLeagueHasNoPlayers() {
         // Nothing to do - the default league starts with no players
     }
 
     @When("I print the league")
-    public void whenIPrintTheLeague()
-    {
+    public void whenIPrintTheLeague() {
         response = app.sendCommand("print");
     }
 
     @Then("I should see {string}")
-    public void iShouldSeeString(String expected)
-    {
+    public void iShouldSeeString(String expected) {
         Assert.assertEquals(expected, response);
     }
 }
