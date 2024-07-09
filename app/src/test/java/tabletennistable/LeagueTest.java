@@ -5,12 +5,15 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.FileWriter;
 import java.util.List;
 import org.hamcrest.core.IsCollectionContaining;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.Mockito;
 
 public class LeagueTest {
     private League league;
@@ -35,17 +38,15 @@ public class LeagueTest {
         assertThat(firstRowPlayers, IsCollectionContaining.hasItem(this.BOB));
     }
 
-    @Test
-    public void testAddPlayerWontAddPlayerWithNameWithSpecialCharacters() {
-        assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                league.addPlayer("test@guy");
-            }
-        });
-
-        List<LeagueRow> rows = this.league.getRows();
-        Assert.assertEquals(0, rows.size());
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "",
+            "+",
+            "Al!ce",
+            "alice-smith"
+    })
+    public void addPlayerShouldntAddPlayerWithInvalidName(final String name) {
+        assertThrows(IllegalArgumentException.class, () -> this.league.addPlayer(name));
     }
 
     @Test
@@ -102,5 +103,9 @@ public class LeagueTest {
             this.league.addPlayer(this.BOB));
 
         assertTrue(exception.getMessage().contains(""));
+    }
+
+    @Test
+    public void canSaveAGame() {
     }
 }

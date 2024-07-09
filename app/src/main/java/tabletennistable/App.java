@@ -1,30 +1,24 @@
 package tabletennistable;
 
 public class App {
-    private League league;
-    private LeagueRenderer leagueRenderer;
+    private League league; private LeagueRenderer leagueRenderer;
     private FileService fileService;
 
-    public App(League initialLeague, LeagueRenderer leagueRenderer, FileService fileService)
-    {
+    public App(League initialLeague, LeagueRenderer leagueRenderer, FileService fileService) {
         league = initialLeague;
         this.leagueRenderer = leagueRenderer;
         this.fileService = fileService;
     }
 
-    public String sendCommand(String command)
-    {
-        try
-        {
-            if (command.startsWith("add player"))
-            {
+    public String sendCommand(String command) {
+        try {
+            if (command.startsWith("add player")) {
                 String player = command.substring(11);
                 league.addPlayer(player);
                 return "Added player " + player;
             }
 
-            if (command.startsWith("record win"))
-            {
+            if (command.startsWith("record win")) {
                 String playersString = command.substring(11);
                 String[] players = playersString.split(" ");
                 String winner = players[0];
@@ -33,34 +27,28 @@ public class App {
                 return "Recorded " + winner + " win against " + loser;
             }
 
-            if (command.equals("print"))
-            {
+            if (command.equals("print")) {
                 return leagueRenderer.render(league);
             }
 
-            if (command.equals("winner"))
-            {
+            if (command.equals("winner")) {
                 return league.getWinner();
             }
 
-            if (command.startsWith("save"))
-            {
+            if (command.startsWith("save")) {
                 String name = command.substring(5);
                 fileService.save(name, league);
                 return "Saved " + name;
             }
 
-            if (command.startsWith("load"))
-            {
+            if (command.startsWith("load")) {
                 String name = command.substring(5);
                 league = fileService.load(name);
                 return "Loaded " + name;
             }
 
             return "Unknown command: " + command;
-        }
-        catch (IllegalArgumentException e)
-        {
+        } catch (IllegalArgumentException e) {
             return e.getMessage();
         }
     }

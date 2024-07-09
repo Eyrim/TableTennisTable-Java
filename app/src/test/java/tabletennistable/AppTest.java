@@ -12,15 +12,21 @@ public class AppTest {
     @Mock
     LeagueRenderer renderer;
 
+    private League league;
+
     @BeforeEach
     public void initMocks() {
         MockitoAnnotations.initMocks(this);
     }
 
+    @BeforeEach
+    public void setup() {
+        this.league = new League();
+    }
+
     @Test
     public void testPrintsCurrentState() {
         initMocks();
-        League league = new League();
         when(renderer.render(league)).thenReturn("Rendered League");
 
         App app = new App(league, renderer, null);
