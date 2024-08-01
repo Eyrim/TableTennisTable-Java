@@ -1,7 +1,8 @@
 package tabletennistable;
 
 public class App {
-    private League league; private LeagueRenderer leagueRenderer;
+    private League league; 
+    private LeagueRenderer leagueRenderer;
     private FileService fileService;
 
     public App(League initialLeague, LeagueRenderer leagueRenderer, FileService fileService) {

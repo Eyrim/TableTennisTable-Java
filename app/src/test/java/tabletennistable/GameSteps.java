@@ -35,4 +35,14 @@ public class GameSteps {
     public void iShouldSeeString(String expected) {
         Assert.assertEquals(expected, response);
     }
+
+    @When("I add a player to the league called {string}")
+    public void addPlayerCalled(final String playerName) {
+        app.sendCommand("add player " + playerName);
+    }
+
+    @Then("the league has a player called {string}")
+    public void leagueHasPlayerCalled(final String playerName) {
+        app.sendCommand("
+    }
 }
