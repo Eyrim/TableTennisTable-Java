@@ -41,8 +41,9 @@ public class GameSteps {
         app.sendCommand("add player " + playerName);
     }
 
+
     @Then("the league has a player called {string}")
     public void leagueHasPlayerCalled(final String playerName) {
-        app.sendCommand("
+        //app.sendCommand("
     }
 }

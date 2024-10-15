@@ -1,0 +1,10 @@
+.git/
+.gradle/
+.settings/
+.gitattributes
+.gitignore
+.project
+README.md
+app/test/
+app/build/
+.env
