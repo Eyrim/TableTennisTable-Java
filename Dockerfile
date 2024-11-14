@@ -9,7 +9,6 @@ FROM base as production
 
 CMD gradle run
 
-FROM base as development
+FROM base as test
 
 RUN gradle test
-# ENV JAVA_TOOL_OPTIONS -agentlib:jdwp=transport=dt_socket,address=16476,server=y,suspend=n
