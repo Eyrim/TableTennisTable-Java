@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker build --tag tt .
-docker run -i --env-file .env tt
+docker build --tag tt --target "$1" .
+docker run -i --env-file .env -p 8000:16476 tt
